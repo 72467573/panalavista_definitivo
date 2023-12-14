@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:panalavista_definitivo/pages/pestanas_de_logeo/registroController.dart';
 
 class MyRegistroPage2 extends StatelessWidget {
-  const MyRegistroPage2({super.key});
+  RegisterController controller = Get.put(RegisterController());
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +52,7 @@ class MyRegistroPage2 extends StatelessWidget {
       width: double.infinity,
       margin: EdgeInsets.symmetric(horizontal: 40, vertical: 40),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () => controller.register(),
         child: Text(
           "Registrar",
           style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
@@ -77,6 +79,7 @@ class MyRegistroPage2 extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 40),
       child: TextField(
+        controller: controller.nameController,
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
             hintText: "Nombre", prefixIcon: Icon(Icons.person_outline)),
@@ -88,6 +91,7 @@ class MyRegistroPage2 extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 40),
       child: TextField(
+        controller: controller.lastNameController,
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
             hintText: "Apellido", prefixIcon: Icon(Icons.person_outline)),
@@ -99,7 +103,8 @@ class MyRegistroPage2 extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 40),
       child: TextField(
-        keyboardType: TextInputType.number,
+        controller: controller.phoneController,
+        keyboardType: TextInputType.text,
         decoration: InputDecoration(
             hintText: "Telefono", prefixIcon: Icon(Icons.call_outlined)),
       ),
@@ -110,6 +115,7 @@ class MyRegistroPage2 extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 40),
       child: TextFormField(
+        controller: controller.emailController,
         keyboardType: TextInputType.emailAddress,
         inputFormatters: [
           FilteringTextInputFormatter.singleLineFormatter,
@@ -121,22 +127,11 @@ class MyRegistroPage2 extends StatelessWidget {
     );
   }
 
-  Widget _textField() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 40),
-      child: TextField(
-        keyboardType: TextInputType.emailAddress,
-        decoration: InputDecoration(
-            hintText: "Correo electronico",
-            prefixIcon: Icon(Icons.email_outlined)),
-      ),
-    );
-  }
-
   Widget _textFielPassword() {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 40),
       child: TextField(
+        controller: controller.passwordController,
         keyboardType: TextInputType.text,
         obscureText: true,
         decoration: InputDecoration(
@@ -149,6 +144,7 @@ class MyRegistroPage2 extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 40),
       child: TextField(
+        controller: controller.confirmPasswordController,
         keyboardType: TextInputType.text,
         obscureText: true,
         decoration: InputDecoration(
