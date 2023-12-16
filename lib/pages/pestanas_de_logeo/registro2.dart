@@ -104,7 +104,7 @@ class MyRegistroPage2 extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 40),
       child: TextField(
         controller: controller.phoneController,
-        keyboardType: TextInputType.text,
+        keyboardType: TextInputType.number,
         decoration: InputDecoration(
             hintText: "Telefono", prefixIcon: Icon(Icons.call_outlined)),
       ),
