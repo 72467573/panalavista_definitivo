@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:panalavista_definitivo/pages/valoracion_comen.dart';
 import 'package:panalavista_definitivo/widgets/drawer.dart';
 
 class MyValoracion extends StatelessWidget {
@@ -12,20 +13,23 @@ class MyValoracion extends StatelessWidget {
         backgroundColor: Color.fromARGB(255, 136, 59, 0),
       ),
       drawer: Drawer(child: MyDrawer()),
-      body: ListView(
-        children: [
-          _buildContainer(
-              "Jhon Fuentes", "Mejoraria la rapidez de la atencion", " ★ ★ ★"),
-          _buildContainer(
-              "Branny Gomez", "Buena calidad y atencion", " ★ ★ ★ ★ ★"),
-          _buildContainer("Jhan Rosas", "Muy calido la atencion", " ★ ★ ★ ★"),
-          _buildContainer("Rosa Maria", "Excelente servicio", " ★ ★ ★ ★ ★"),
-          _buildContainer("Oscar Vilchez", "Buena panaderia", " ★ ★ ★"),
-          _buildContainer(
-              "Eliazar Mamani", "Calidad de panaderia", " ★ ★ ★ ★ ★"),
-          _buildContainer("Kleyder Jara", "Excelente", " ★ ★ ★ ★ ★"),
-        ],
-      ),
+      body: Container(
+          color: const Color.fromARGB(255, 224, 169, 5),
+          child: ListView(
+            children: [
+              _buildContainer(
+                  "Jhon Fuentes", "Mejorarar  de la atencion", " ★ ★ ★"),
+              _buildContainer(
+                  "Branny Gomez", "Buena calidad y atencion", " ★ ★ ★ ★ ★"),
+              _buildContainer(
+                  "Jhan Rosas", "Muy calido la atencion", " ★ ★ ★ ★"),
+              _buildContainer("Rosa Maria", "Excelente servicio", " ★ ★ ★ ★ ★"),
+              _buildContainer("Oscar Vilchez", "Buena panaderia", " ★ ★ ★"),
+              _buildContainer(
+                  "Eliazar Mamani", "Calidad de panaderia", " ★ ★ ★ ★ ★"),
+              _buildContainer("Kleyder Jara", "Excelente", " ★ ★ ★ ★ ★"),
+            ],
+          )),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.brown,
         child: Icon(
@@ -33,16 +37,33 @@ class MyValoracion extends StatelessWidget {
           size: 30,
           color: Colors.white,
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => Comentar(),
+          ));
+        },
       ),
     );
   }
 
   Widget _buildContainer(String title, String location, String rating) {
     return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30), bottomRight: Radius.circular(30)),
+        gradient: LinearGradient(colors: [
+          Color.fromARGB(255, 179, 104, 6),
+          Color.fromARGB(255, 185, 1, 1),
+        ]),
+        boxShadow: [
+          BoxShadow(
+            offset: Offset(0, 0),
+            blurRadius: 1,
+          ),
+        ],
+      ),
       height: 120,
       margin: const EdgeInsets.all(10.0),
-      color: Color.fromARGB(193, 167, 216, 220),
       padding: const EdgeInsets.all(16.0),
       child: Row(
         children: [

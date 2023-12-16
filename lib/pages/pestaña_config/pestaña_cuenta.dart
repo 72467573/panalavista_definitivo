@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:panalavista_definitivo/pages/configuraciones.dart';
+import 'package:panalavista_definitivo/pages/pesta%C3%B1a_config/expe1.2.dart';
+import 'package:panalavista_definitivo/pages/pesta%C3%B1a_config/expe1.4.dart';
 import 'package:panalavista_definitivo/pages/pesta%C3%B1a_config/pesta%C3%B1a_config.dart';
+import 'package:panalavista_definitivo/widgets/drawer.dart';
 
 class MyCuenta extends StatefulWidget {
   const MyCuenta({super.key});
@@ -10,6 +13,19 @@ class MyCuenta extends StatefulWidget {
 }
 
 class _MyCuentaState extends State<MyCuenta> {
+  final List<String> tasks = <String>[];
+  final nombre = TextEditingController();
+  final apellido = TextEditingController();
+  final correo = TextEditingController();
+  final contrasena = TextEditingController();
+
+  _iddItem(value) {
+    correo.clear();
+    setState(() {
+      tasks.add(value);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,11 +40,6 @@ class _MyCuentaState extends State<MyCuenta> {
           elevation: 14,
           //shadowColor: Colors.white,
 
-          leading: const Icon(
-            Icons.account_circle,
-            color: Color.fromARGB(252, 0, 0, 0),
-            size: 60,
-          ),
           actions: [
             IconButton(
               icon: Icon(
@@ -45,33 +56,52 @@ class _MyCuentaState extends State<MyCuenta> {
             )
           ],
         ),
-        body: SizedBox(
-            child: Column(
+        drawer: Drawer(child: MyDrawer()),
+        body: Container(
+            child: SingleChildScrollView(
+                child: Column(
           children: [
             Botoncitos(
-              titulo: 'Nombre                 ',
-              subdata: 'Pepe Andres                         ',
+              titulo: 'Nombre',
+              subdata: TextField(controller: nombre),
               clikBoton: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Myconfiguraciones()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Apartado4()));
               },
             ),
             Botoncitos(
-              titulo: 'Apellido                 ',
-              subdata: 'Rojas Cerpa                          ',
-              clikBoton: () {},
+              clikBoton: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Apartado4()));
+              },
+              titulo: 'Apellido',
+              subdata: TextField(
+                keyboardType: TextInputType.text,
+                controller: apellido,
+                onSubmitted: _iddItem,
+              ),
             ),
             Botoncitos(
-              titulo: 'Correo electronico',
-              subdata: 'Correo@.gmail.com             ',
-              clikBoton: () {},
+              titulo: 'Correo  ',
+              subdata: TextField(
+                keyboardType: TextInputType.emailAddress,
+                controller: correo,
+              ),
+              clikBoton: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Apartado2()));
+              },
             ),
             Botoncitos(
-              titulo: 'Contraseña           ',
-              subdata: '***********                           ',
-              clikBoton: () {},
+              titulo: 'Codigo ',
+              subdata: TextField(
+                keyboardType: TextInputType.visiblePassword,
+                controller: contrasena,
+              ),
+              clikBoton: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Apartado4()));
+              },
             ),
             Botoncitos2(
                 titulo2: "boton",
@@ -84,7 +114,7 @@ class _MyCuentaState extends State<MyCuenta> {
                 },
                 subdata2: 'hola')
           ],
-        )));
+        ))));
   }
 }
 
@@ -92,12 +122,16 @@ class _MyCuentaState extends State<MyCuenta> {
 
 class Botoncitos extends StatelessWidget {
   final String titulo;
+  //final Row texto;
   //final Container boton;
-  final String subdata;
+  final TextField subdata;
   final VoidCallback clikBoton;
 
-  const Botoncitos(
-      {required this.titulo, required this.clikBoton, required this.subdata});
+  const Botoncitos({
+    required this.titulo,
+    required this.clikBoton,
+    required this.subdata,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -107,41 +141,49 @@ class Botoncitos extends StatelessWidget {
         contentPadding: EdgeInsets.only(bottom: 0, left: 10, top: 14),
 
         //shape: const RoundedRectangleBorder( side: BorderSide(color: Colors.black, width: 1),borderRadius: BorderRadius.zero,)
-        shape: Border(
-            bottom:
-                BorderSide(width: 0, color: Color.fromARGB(255, 88, 88, 88))),
 
         title: Align(
           child: Row(children: [
             Column(
               children: [
-                Text(
-                  titulo,
-                  style: TextStyle(fontSize: 24),
-                ),
-                Text(
-                  subdata,
-                  style: TextStyle(fontSize: 14),
-                )
+                Container(
+                    margin: const EdgeInsets.only(right: 100),
+                    child: Text(
+                      titulo,
+                      style: TextStyle(fontSize: 18),
+                    )),
+                Container(
+                    margin: const EdgeInsets.only(top: 25),
+                    width: 170,
+                    height: 17,
+                    child: subdata),
               ],
             ),
             Container(
                 width: 104,
                 height: 30,
-                margin: const EdgeInsets.only(top: 35, left: 30),
+                margin: const EdgeInsets.only(top: 0, left: 50),
                 child: ElevatedButton(
-                  onPressed: clikBoton,
-                  child: Text(
-                    'Cambiar',
-                    selectionColor: Colors.red,
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.brown,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5)),
-                    foregroundColor: Color.fromARGB(255, 236, 236, 236),
-                  ),
-                ))
+                    onPressed: clikBoton,
+                    child: Row(
+                      children: [
+                        Text(
+                          'Eliminar',
+                          selectionColor: Colors.red,
+                          style: TextStyle(fontSize: 15),
+                        ),
+                        Icon(
+                          Icons.delete,
+                          size: 15,
+                        )
+                      ],
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromARGB(255, 136, 59, 0),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5)),
+                      foregroundColor: Color.fromARGB(255, 236, 236, 236),
+                    ))),
           ]) //Text(subdata, style: TextStyle(fontSize: 18)),
 
           ,
@@ -191,11 +233,10 @@ class Botoncitos2 extends StatelessWidget {
             onPressed: presionar2,
             child: Text('Guardar'),
             style: ElevatedButton.styleFrom(
-              foregroundColor: Color.fromARGB(255, 255, 255, 255),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5)),
-              backgroundColor: Colors.brown,
-            ),
+                foregroundColor: Color.fromARGB(255, 255, 255, 255),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5)),
+                backgroundColor: Color.fromARGB(255, 71, 31, 0)),
           ),
         ],
       ),
